@@ -115,7 +115,7 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 Name=GNU Backgammon
 Comment=GNU Backgammon
 Exec=%{_gamesbindir}/%{name} -b 
-Icon=strategy_section.png
+Icon=strategy_section
 Terminal=false
 Type=Application
 Categories=X-MandrivaLinux-MoreApplications-Games-Boards;Game;BoardGame;
