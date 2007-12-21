@@ -11,6 +11,7 @@ Release:	%{release}
 License:	GPL
 Group:		Games/Boards
 URL:		http://www.gnu.org/software/gnubg/
+Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 Source0:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.bz2
 #Source1:	%{SOURCE0}.sig
