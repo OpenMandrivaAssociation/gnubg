@@ -1,5 +1,5 @@
 %define version 0.15
-%define release %mkrel 1
+%define release %mkrel 3
 
 %define enable_3d 1
 %{?_without_3d: %define enable_3d 0}
