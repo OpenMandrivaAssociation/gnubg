@@ -1,5 +1,8 @@
 %define version 0.15
-%define release %mkrel 4
+%define release %mkrel 5
+# can't get rid of
+# renderprefs.c:672: error: format not a string literal and no format arguments
+%define Werror_cflags %nil
 
 %define enable_3d 1
 %{?_without_3d: %define enable_3d 0}
@@ -11,7 +14,6 @@ Release:	%{release}
 License:	GPL
 Group:		Games/Boards
 URL:		http://www.gnu.org/software/gnubg/
-Buildroot:	%{_tmppath}/%{name}-%{version}-buildroot
 
 Source0:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.bz2
 #Source1:	%{SOURCE0}.sig
@@ -22,6 +24,8 @@ Source5:	%{SOURCE4}.sig
 Source6:	ftp://ftp.gnu.org/gnu/%{name}/gnubg_ts0.bd.gz
 Source7:	%{SOURCE6}.sig
 Source8:	gnubg-textures.txt.bz2
+Patch0:     gnubg-0.15-fix-format-errors.patch
+Patch1:     gnubg-0.15-fix-linking-order.patch
 
 BuildRequires:	flex
 BuildRequires:	bison
@@ -49,6 +53,7 @@ BuildRequires:	ftgl-devel
 BuildRequires:	gtkglext-devel >= 1.0
 BuildRequires:	mesaglut-devel
 %endif
+Buildroot:	%{_tmppath}/%{name}-%{version}
 
 %description
 GNU Backgammon (gnubg) plays and analyses backgammon games and matches.
@@ -76,6 +81,8 @@ Some of its features include:
 
 %prep
 %setup -q -n %{name}
+%patch0 -p 1
+%patch1 -p 1
 
 # (Abel) Let it be. Adding proper detection of nas library is tedious
 perl -pi -e 's#-laudio#-L/usr/X11R6/%{_lib} -laudio#' configure.in
