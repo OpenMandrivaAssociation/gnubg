@@ -1,5 +1,5 @@
 %define version 0.15
-%define release %mkrel 5
+%define release %mkrel 6
 # can't get rid of
 # renderprefs.c:672: error: format not a string literal and no format arguments
 %define Werror_cflags %nil
