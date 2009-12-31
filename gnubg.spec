@@ -1,8 +1,5 @@
-%define version 0.15
-%define release %mkrel 6
-# can't get rid of
-# renderprefs.c:672: error: format not a string literal and no format arguments
-%define Werror_cflags %nil
+%define version 0.9.0
+%define release %mkrel 1
 
 %define enable_3d 1
 %{?_without_3d: %define enable_3d 0}
@@ -11,42 +8,26 @@ Summary:	GNU Backgammon
 Name:		gnubg
 Version:	%{version}
 Release:	%{release}
+Epoch:		1
 License:	GPL
 Group:		Games/Boards
-URL:		http://www.gnu.org/software/gnubg/
+URL:		http://www.gnubg.org
 
-Source0:	ftp://ftp.gnu.org/gnu/%{name}/%{name}-%{version}.tar.bz2
-#Source1:	%{SOURCE0}.sig
-Source2:	ftp://ftp.gnu.org/gnu/%{name}/gnubg.weights-0.14.gz
-Source3:	%{SOURCE2}.sig
-Source4:	ftp://ftp.gnu.org/gnu/%{name}/gnubg_os0.bd.gz
-Source5:	%{SOURCE4}.sig
-Source6:	ftp://ftp.gnu.org/gnu/%{name}/gnubg_ts0.bd.gz
-Source7:	%{SOURCE6}.sig
-Source8:	gnubg-textures.txt.bz2
-Patch0:     gnubg-0.15-fix-format-errors.patch
-Patch1:     gnubg-0.15-fix-linking-order.patch
+Source0:	http://www.gnubg.org/media/sources/%{name}/%{name}-%{version}-1.tar.gz
+Patch0:		gnubg-0.9.0-strfmt.patch
 
 BuildRequires:	flex
 BuildRequires:	bison
-BuildRequires:	gnuplot
-BuildRequires:	netpbm
 BuildRequires:	readline-devel
 BuildRequires:	gdbm-devel
 BuildRequires:	gettext-devel
 BuildRequires:	termcap-devel
 BuildRequires:	gmp-devel
 BuildRequires:	gtk+2-devel
-BuildRequires:	guile-devel
 BuildRequires:	libxml2-devel
 BuildRequires:	python-devel
-BuildRequires:	arts-devel
-BuildRequires:	esound-devel
-BuildRequires:	audiofile-devel
-BuildRequires:	nas-devel
 BuildRequires:	png-devel
-BuildRequires:	gettext-devel
-BuildRequires:	ghostscript
+BuildRequires:	esound-devel
 
 %if %enable_3d
 BuildRequires:	ftgl-devel
@@ -81,27 +62,13 @@ Some of its features include:
 
 %prep
 %setup -q -n %{name}
-%patch0 -p 1
-%patch1 -p 1
-
-# (Abel) Let it be. Adding proper detection of nas library is tedious
-perl -pi -e 's#-laudio#-L/usr/X11R6/%{_lib} -laudio#' configure.in
-#ACLOCAL=aclocal-1.9 AUTOMAKE=automake-1.9 autoreconf -I m4
-
-gzip -dc %{SOURCE2} > gnubg.weights
-gzip -dc %{SOURCE4} > gnubg_ts0.bd
-gzip -dc %{SOURCE6} > gnubg_os0.bd
-bzip2 -dc %{SOURCE8} > textures.txt
+%patch0 -p0 -b .strfmt
 
 %build
 ./autogen.sh
 %configure2_5x \
-	--with-readline \
-	--with-gtk2 \
+	--with-gtk \
 	--with-python \
-	--with-sound \
-	--with-timecontrol \
-	--enable-nas \
 	--bindir=%{_gamesbindir} \
 %if %enable_3d
 	--with-board3d \
@@ -137,17 +104,14 @@ rm -rf %{buildroot}%{_datadir}/locale/en@quot
 rm -rf %{buildroot}
 
 %post
-%_install_info %{name}.info
 
 %preun
-%_remove_install_info %{name}.info
 
 
 %files -f %{name}.lang
 %defattr(-, root, root)
 %{_gamesbindir}/*
 %{_datadir}/%{name}
-%{_infodir}/*
 %{_mandir}/man6/*
 %{_datadir}/applications/mandriva-%{name}.desktop
 
