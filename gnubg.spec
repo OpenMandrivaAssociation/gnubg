@@ -1,4 +1,4 @@
-%define version 0.9.0
+%define version 0.9.0.1
 %define release %mkrel 1
 
 %define enable_3d 1
@@ -9,7 +9,7 @@ Name:		gnubg
 Version:	%{version}
 Release:	%{release}
 Epoch:		1
-License:	GPL
+License:	GPLv2+
 Group:		Games/Boards
 URL:		http://www.gnubg.org
 
