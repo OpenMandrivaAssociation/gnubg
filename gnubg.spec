@@ -1,4 +1,4 @@
-%define version 0.9.0.1
+%define version 0.9.0
 %define release %mkrel 2
 
 %define enable_3d 1
