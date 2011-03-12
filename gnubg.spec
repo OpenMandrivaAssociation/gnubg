@@ -1,5 +1,5 @@
 %define version 0.9.0
-%define release %mkrel 2
+%define release %mkrel 3
 
 %define enable_3d 1
 %{?_without_3d: %define enable_3d 0}
@@ -88,11 +88,11 @@ cat > $RPM_BUILD_ROOT%{_datadir}/applications/mandriva-%{name}.desktop << EOF
 [Desktop Entry]
 Name=GNU Backgammon
 Comment=GNU Backgammon
-Exec=%{_gamesbindir}/%{name} -b 
+Exec=%{_gamesbindir}/%{name} -b -w
 Icon=strategy_section
 Terminal=false
 Type=Application
-Categories=X-MandrivaLinux-MoreApplications-Games-Boards;Game;BoardGame;
+Categories=Game;BoardGame;
 EOF
 
 # remove unwanted files
