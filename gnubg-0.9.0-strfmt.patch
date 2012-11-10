@@ -1,0 +1,105 @@
+--- dice.c	2008-01-21 06:20:03.000000000 +0000
++++ dice.c.new	2009-12-31 16:57:16.161437986 +0000
+@@ -988,7 +988,7 @@
+       lseek( rngctx->hDice, 0, SEEK_SET );
+     }
+     else if ( n < 0 ) {
+-      g_printerr(rngctx->szDiceFilename);
++      g_printerr("%s", rngctx->szDiceFilename);
+       return -1;
+     }
+     else if ( uch >= '1' && uch <= '6' )
+--- eval.c	2008-03-13 06:20:04.000000000 +0000
++++ eval.c.new	2009-12-31 17:02:12.409549857 +0000
+@@ -649,11 +649,11 @@
+ 
+ 	if (!weights)
+ 	{
+-		g_print(filename);
++		g_print("%s", filename);
+ 		return -1;
+ 	}
+ 	if (fread(&r, sizeof r, 1, weights) < 1) {
+-		g_print(filename);
++		g_print("%s", filename);
+ 		return -2;
+ 	}
+ 	if (r != WEIGHTS_MAGIC_BINARY) {
+@@ -661,7 +661,7 @@
+ 		return -3;
+ 	}
+ 	if (fread(&r, sizeof r, 1, weights) < 1) {
+-		g_print(filename);
++		g_print("%s", filename);
+ 		return -4;
+ 	}
+ 	if (r != WEIGHTS_VERSION_BINARY) {
+@@ -680,7 +680,7 @@
+ 	char file_version[16];
+ 	if (!weights)
+ 	{
+-		g_print(filename);
++		g_print("%s", filename);
+ 		return -1;
+ 	}
+ 
+--- gnubg.c	2008-03-19 06:20:03.000000000 +0000
++++ gnubg.c.new	2009-12-31 17:05:10.728299941 +0000
+@@ -5120,7 +5120,7 @@
+ 	return;
+ #endif
+ 
+-    g_print( FormatPrompt() );
++    g_print("%s",  FormatPrompt() );
+     fflush( stdout );    
+ }
+ 
+@@ -5302,7 +5302,7 @@
+     if( fInterrupt )
+ 	return NULL;
+ 
+-    g_print( szPrompt );
++    g_print("%s",  szPrompt );
+     fflush( stdout );
+ 
+     sz = malloc( 256 ); /* FIXME it would be nice to handle longer strings */
+--- renderprefs.c	2007-12-19 06:20:03.000000000 +0000
++++ renderprefs.c.new	2009-12-31 17:13:10.047318134 +0000
+@@ -672,7 +672,7 @@
+   if (prd->arLight[1] < 0)
+     rAzimuth = 360 - rAzimuth;
+ 
+-  sprintf (sz, g_strdup_printf ("set appearance board=#%02X%02X%02X;%s ",
++  sprintf (sz, "%s", g_strdup_printf ("set appearance board=#%02X%02X%02X;%s ",
+         prd->aanBoardColour[0][0],
+         prd->aanBoardColour[0][1],
+         prd->aanBoardColour[0][2],
+--- show.c	2008-01-18 06:20:04.000000000 +0000
++++ show.c.new	2009-12-31 17:14:42.130547257 +0000
+@@ -945,7 +945,7 @@
+ 
+   int i;
+ 
+-  outputf( title );
++  outputf("%s", title );
+   outputc( '\n' );
+   
+   for ( i = 0; ace[ i ].Name; ++i ) {
+@@ -1141,7 +1141,7 @@
+ 	}
+ #endif
+ 	show_kleinman(an, out);
+-	outputf(out);
++	outputf("%s", out);
+ }
+ 
+ #if USE_MULTITHREAD
+@@ -1197,7 +1197,7 @@
+ 	}
+ #endif
+ 	show_thorp(an, out);
+-	g_print(out);
++	g_print("%s", out);
+ 
+ }
+ 
