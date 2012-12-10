@@ -1,5 +1,5 @@
-%define version 0.9.0
-%define release %mkrel 4
+%define version 20121022
+%define release 1
 
 %define enable_3d 1
 %{?_without_3d: %define enable_3d 0}
@@ -8,13 +8,11 @@ Summary:	GNU Backgammon
 Name:		gnubg
 Version:	%{version}
 Release:	%{release}
-Epoch:		1
 License:	GPLv2+
 Group:		Games/Boards
 URL:		http://www.gnubg.org
 
-Source0:	http://www.gnubg.org/media/sources/%{name}/%{name}-%{version}-1.tar.gz
-Patch0:		gnubg-0.9.0-strfmt.patch
+Source0:	http://gnubg.org/media/sources/%{name}-source-SNAPSHOT-%{version}.tar.gz
 
 BuildRequires:	flex
 BuildRequires:	bison
@@ -32,9 +30,8 @@ BuildRequires:	esound-devel
 %if %enable_3d
 BuildRequires:	ftgl-devel
 BuildRequires:	gtkglext-devel >= 1.0
-BuildRequires:	mesaglut-devel
+BuildRequires:	pkgconfig(glu)
 %endif
-Buildroot:	%{_tmppath}/%{name}-%{version}
 
 %description
 GNU Backgammon (gnubg) plays and analyses backgammon games and matches.
@@ -62,7 +59,6 @@ Some of its features include:
 
 %prep
 %setup -q -n %{name}
-%patch0 -p0 -b .strfmt
 
 %build
 ./autogen.sh
@@ -100,9 +96,6 @@ rm -rf %{buildroot}%{_datadir}/locale/en@quot
 
 %find_lang %{name}
 
-%clean
-rm -rf %{buildroot}
-
 %post
 
 %preun
@@ -114,5 +107,78 @@ rm -rf %{buildroot}
 %{_datadir}/%{name}
 %{_mandir}/man6/*
 %{_datadir}/applications/mandriva-%{name}.desktop
+%{_docdir}/%{name}
+%{_iconsdir}/hicolor/*/apps/%{name}.*
 
+
+
+%changelog
+* Sat Mar 12 2011 Funda Wang <fwang@mandriva.org> 1:0.9.0-3mdv2011.0
++ Revision: 643963
+- fix desktop launcher (bug#62761)
+
+* Wed Feb 10 2010 Funda Wang <fwang@mandriva.org> 1:0.9.0-2mdv2011.0
++ Revision: 503622
+- fix version
+- rebuild for new gmp
+
+  + Sandro Cazzaniga <kharec@mandriva.org>
+    - fix licence and version
+
+* Thu Dec 31 2009 Crispin Boylan <crisb@mandriva.org> 1:0.9.0-1mdv2010.1
++ Revision: 484504
+- New(er) release 0.9.0
+- Clean up spec file
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Sat Feb 28 2009 Guillaume Rousse <guillomovitch@mandriva.org> 0.15-5mdv2009.1
++ Revision: 346063
+- builtfor latest readline
+- fix some (not all) format errors
+- fix linking order
+
+  + Adam Williamson <awilliamson@mandriva.org>
+    - rebuild for new ftgl major
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - rebuild
+
+* Fri Dec 21 2007 Olivier Blin <oblin@mandriva.com> 0.15-1mdv2008.1
++ Revision: 136454
+- restore BuildRoot
+
+  + Thierry Vignaud <tv@mandriva.org>
+    - kill re-definition of %%buildroot on Pixel's request
+    - do not harcode icon extension
+    - kill desktop-file-validate's 'warning: key "Encoding" in group "Desktop Entry" is deprecated'
+
+
+* Sun Mar 04 2007 Emmanuel Andry <eandry@mandriva.org> 0.15-1mdv2007.0
++ Revision: 132148
+- buildrequires ghostscript
+- drop source 1
+- New version 0.15
+
+  + Nicolas Lécureuil <neoclust@mandriva.org>
+    - Fix BuildRequires
+    - Use mkrel
+    - Fix BuildRequires
+    - Add menu entry
+    - Import gnubg
+
+* Tue Feb 08 2005 Abel Cheung <deaddog@mandrake.org> 0.14.3-4mdk
+- Rebuild against new readline
+
+* Sun Dec 26 2004 Abel Cheung <deaddog@mandrake.org> 0.14.3-3mdk
+- Rebuild against new python
+
+* Thu Dec 02 2004 Abel Cheung <deaddog@mandrake.org> 0.14.3-2mdk
+- Fix BuildRequires
+
+* Thu Nov 04 2004 Abel Cheung <deaddog@mandrake.org> 0.14.3-1mdk
+- First Mandrakelinux package
+- If you try to play without -b option, it will encounter
+  assertion fail and quit during bearoff
 
