@@ -1,13 +1,10 @@
-%define version 20121022
-%define release: 3
-
 %define enable_3d 1
 %{?_without_3d: %define enable_3d 0}
 
 Summary:	GNU Backgammon
 Name:		gnubg
-Version:	%{version}
-Release:	%{release}
+Version:	20121022
+Release:	3
 License:	GPLv2+
 Group:		Games/Boards
 URL:		http://www.gnubg.org
