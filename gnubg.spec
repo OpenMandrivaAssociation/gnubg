@@ -1,5 +1,5 @@
 %define version 20121022
-%define release 1
+%define release: 2
 
 %define enable_3d 1
 %{?_without_3d: %define enable_3d 0}
@@ -96,9 +96,7 @@ rm -rf %{buildroot}%{_datadir}/locale/en@quot
 
 %find_lang %{name}
 
-%post
 
-%preun
 
 
 %files -f %{name}.lang
