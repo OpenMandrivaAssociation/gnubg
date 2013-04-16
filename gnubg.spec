@@ -1,5 +1,5 @@
 %define version 20121022
-%define release: 2
+%define release: 3
 
 %define enable_3d 1
 %{?_without_3d: %define enable_3d 0}
