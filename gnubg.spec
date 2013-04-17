@@ -23,6 +23,7 @@ BuildRequires:	libxml2-devel
 BuildRequires:	python-devel
 BuildRequires:	png-devel
 BuildRequires:	esound-devel
+BuildRequires:  pkgconfig(glib-2.0)
 
 %if %enable_3d
 BuildRequires:	ftgl-devel
