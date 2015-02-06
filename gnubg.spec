@@ -4,7 +4,7 @@
 Summary:	GNU Backgammon
 Name:		gnubg
 Version:	20121022
-Release:	3
+Release:	4
 License:	GPLv2+
 Group:		Games/Boards
 URL:		http://www.gnubg.org
