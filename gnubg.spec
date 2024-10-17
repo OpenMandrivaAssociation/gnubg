@@ -7,7 +7,7 @@ Version:	20121022
 Release:	4
 License:	GPLv2+
 Group:		Games/Boards
-URL:		http://www.gnubg.org
+URL:		https://www.gnubg.org
 
 Source0:	http://gnubg.org/media/sources/%{name}-source-SNAPSHOT-%{version}.tar.gz
 
