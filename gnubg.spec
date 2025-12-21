@@ -11,6 +11,11 @@ URL:		https://www.gnubg.org
 
 Source0:	http://gnubg.org/media/sources/%{name}-source-SNAPSHOT-%{version}.tar.gz
 
+BuildRequires:	autoconf
+BuildRequires:	automake
+BuildRequires:	libtool-base
+BuildRequires:	slibtool
+BuildRequires:	make
 BuildRequires:	flex
 BuildRequires:	bison
 BuildRequires:	readline-devel
